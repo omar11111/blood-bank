@@ -45,6 +45,9 @@ Route::group(['prefix'=>'v1','namespace'=>'api'],function(){
 
     // authentcation
     Route::post('signup',[AuthController::class,'register']);
-    Route::post('signin',[AuthController::class,'login']);
-    Route::get('forget-password',[AuthController::class,'forgetPassword'] ) ;
+    Route::get('signin',[AuthController::class,'login']);
+    Route::post('forget-password',[AuthController::class,'forgetPassword'] ) ;
+    Route::post('create-new-password',[AuthController::class,'createNewPssword'] ) ;
+    
+    
 });

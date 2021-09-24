@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Traits\ApiResponse;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -74,8 +75,10 @@ class AuthController extends Controller
                     'client'=>$client
                 ]);
             }else {
-
-                return $this->apiResponse(0,'البيانات التى ادخلتها غير ', $client->password );
+                
+                  
+              
+                return $this->apiResponse(0,'البيانات التى ادخلتها غير ', $request->password );
 
             }
 
@@ -109,11 +112,49 @@ public function forgetPassword(Request $request)
 
          Mail::to($client->email)->send(new ResetPassword($client->code));
         return $this->apiResponse(1,'تم ارسال كود لتجديد الباسورد على ايميلك',['code'=>$client->code]);
+    }else{
+
+        return $this->apiResponse(0,'حدث خطأ حاول مره اخرى');
+        
     }
 
 
      
 }
+
+public function createNewPssword(Request $request)
+{
+    $validator= Validator::make($request->all(),[
+        'code'=>'required|numeric',
+        'password'=>'required|confirmed',
+        
+     ]);
+
+     if ($validator->fails()) {
+       return $this->apiResponse(0,$validator->errors()->first(),$validator->errors());
+    }
+
+    $client =Client::where('code',$request->code)->firstOrFail();
+    if ($client) {
+     
+            
+        $request->merge(['password'=> Hash::make($request->password)]);
+        
+ 
+        $client->password=$request->password;
+        $client->save();
+          
+           
+            return $this->apiResponse(1,'تم تجديد الباسورد بنجاح',$client->password);
+      
+      
+    }else {
+        return $this->apiResponse(0,'حدث خطأ حاول مره اخرى',[]);
+    }
+    
+
+}
+
 
 }
 
