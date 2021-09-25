@@ -13,7 +13,7 @@ use App\Models\Setting;
 use App\Traits\ApiResponse;
 
 
-class GeneralApi extends Controller
+class GeneralApiController extends Controller
 {
     use ApiResponse;
     

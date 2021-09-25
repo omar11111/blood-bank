@@ -6,10 +6,9 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\BloodTypeController;
 use App\Http\Controllers\Api\CategoryNameController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\GeneralApiController;
 
-use App\Http\Controllers\Api\GovernorateController;
-use App\Http\Controllers\Api\SettingController;
-
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,23 +30,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix'=>'v1','namespace'=>'api'],function(){
 
     // Get all data
-    Route::get('governorates', [GovernorateController::class,'index']);
+    Route::get('governorates', [GeneralApiController::class,'governorates']);
 
-    Route::get('cities', [CityController::class,'index']);
+    Route::get('cities', [GeneralApiController::class,'cities']);
 
-    Route::get('settings', [SettingController::class,'index']);
+    Route::get('settings', [GeneralApiController::class,'settings']);
 
-    Route::get('contacts',  [ContactController::class,'index']);
+    Route::get('contacts',  [GeneralApiController::class,'contacts']);
 
-    Route::get('categories',  [CategoryNameController::class,'index']);
+    Route::get('categories',  [GeneralApiController::class,'categories']);
 
-    Route::get('blood_types',  [BloodTypeController::class,'index']);
+    Route::get('blood_types',  [GeneralApiController::class,'bloodTypes']);
 
-    // authentcation
+    // user process 
     Route::post('signup',[AuthController::class,'register']);
-    Route::get('signin',[AuthController::class,'login']);
+    Route::post('signin',[AuthController::class,'login']);
     Route::post('forget-password',[AuthController::class,'forgetPassword'] ) ;
     Route::post('create-new-password',[AuthController::class,'createNewPssword'] ) ;
     
+    //posts
+ Route::middleware('auth:api')->group(function () {
+    Route::get('post',[PostController::class,'posts'] ) ;
+    
+ });
+ 
     
 });

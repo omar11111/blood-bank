@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'api'=>[
+            'driver'=>'token',
+            'provider'=>'clients'
+        ]
     ],
 
     /*
@@ -65,8 +70,9 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        
         // 'users' => [
-        //     'driver' => 'database',
+        //     'driver' => 'el',
         //     'table' => 'users',
         // ],
     ],

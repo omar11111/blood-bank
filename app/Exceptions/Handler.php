@@ -45,7 +45,12 @@ class Handler extends ExceptionHandler
  
     }
 
-   
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+       return $request->expectsJson()
+               ? $this->apiResponse(0, 'Unauthenticated.', [])
+               : redirect()->guest( $exception->redirectTo() ?? route('authentication.index'));
+}
 
 
 }
