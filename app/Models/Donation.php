@@ -9,12 +9,13 @@ class Donation extends Model
 
     protected $table = 'donations';
     public $timestamps = true;
-    protected $fillable = array('name', 'age', 'bags_num', 'hospital_address', 'longitude', 'latitude', 'details', 'client_id', 'blood_type_id');
+    protected $fillable = array('name', 'age', 'bags_num', 'hospital_address', 'longitude', 'latitude', 'details','phone','goveronrate_id','city_id', 'client_id', 'blood_type_id');
 
     public function Donation_Blood_Type()
     {
         return $this->belongsTo('App\Models\BloodType');
     }
+
 
     public function City()
     {
@@ -31,4 +32,8 @@ class Donation extends Model
         return $this->hasMany('App\Models\Client');
     }
 
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notifications');
+    }
 }

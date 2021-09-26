@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\BloodTypeController;
 use App\Http\Controllers\Api\CategoryNameController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\GeneralApiController;
 
 use App\Http\Controllers\Api\PostController;
@@ -51,6 +52,16 @@ Route::group(['prefix'=>'v1','namespace'=>'api'],function(){
     //posts
  Route::middleware('auth:api')->group(function () {
     Route::get('post',[PostController::class,'posts'] ) ;
+    // get user data and view it to be edited 
+    Route::post('profile',[AuthController::class,'profile'] ) ;
+
+    //view and edite notification settings
+    Route::post('notification-settinge',[AuthController::class,'notificationSettings'] ) ;
+
+    //donation
+    Route::post('make-donation',[DonationController::class,'makeDonations'] ) ;
+
+    
     
  });
  

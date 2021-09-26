@@ -9,7 +9,7 @@ class Client extends Model
 
     protected $table = 'clients';
     public $timestamps = true;
-    protected $fillable = array('name', 'phone', 'email', 'password', 'd_o_b', 'last_donation_date','city_id', 'blood_type_id');
+    protected $fillable = array('name', 'phone', 'email', 'password', 'd_o_b','blood_type', 'last_donation_date','city_id', 'blood_type_id');
 
     public function Blood_type()
     {
@@ -18,7 +18,7 @@ class Client extends Model
 
     public function City_id()
     {
-        return $this->belongsTo('App\Models\Citiy');
+        return $this->belongsTo('App\Models\City');
     }
 
     public function Donation()

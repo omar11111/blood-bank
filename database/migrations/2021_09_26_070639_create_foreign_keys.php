@@ -13,11 +13,6 @@ class CreateForeignKeys extends Migration {
 						->onDelete('no action')
 						->onUpdate('no action');
 		});
-		Schema::table('clients', function(Blueprint $table) {
-			$table->foreign('blood_type_id')->references('id')->on('blood_types')
-						->onDelete('no action')
-						->onUpdate('no action');
-		});
 		Schema::table('cities', function(Blueprint $table) {
 			$table->foreign('governorate_id')->references('id')->on('governorates')
 						->onDelete('no action')
@@ -89,9 +84,6 @@ class CreateForeignKeys extends Migration {
 	{
 		Schema::table('clients', function(Blueprint $table) {
 			$table->dropForeign('clients_city_id_foreign');
-		});
-		Schema::table('clients', function(Blueprint $table) {
-			$table->dropForeign('clients_blood_type_id_foreign');
 		});
 		Schema::table('cities', function(Blueprint $table) {
 			$table->dropForeign('cities_governorate_id_foreign');

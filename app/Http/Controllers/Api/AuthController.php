@@ -4,15 +4,21 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPassword;
+use App\Models\BloodType;
 use App\Models\Client;
+use App\Models\Donation;
+use App\Models\Governorate;
 use App\Traits\ApiResponse;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -27,10 +33,11 @@ class AuthController extends Controller
         'phone'=>'required|regex:/^01[0-2,5]{1}[0-9]{8}/i',
         'email'=>'required|email|unique:clients',
         'password'=>'required|confirmed',
+        'blood_type'=>'required',
         'd_o_b'=>'required|date|date_format:Y-m-d',
         'last_donation_date'=>'required|date|date_format:Y-m-d',
         'city_id'=>'required',
-        'blood_type_id'=>'required',
+        
      ]);
 
      if ($validator->fails()) {
@@ -41,6 +48,7 @@ class AuthController extends Controller
 
        $client->api_token=Str::random(60);
        $client->code=rand(10000,99999);
+       $client->is_active=1;
        $client->save();
 
         return $this->apiResponse(1, 'تم الأضافة بنجاح',
@@ -154,6 +162,44 @@ public function createNewPssword(Request $request)
     
 
 }
+
+// get user data and view it to be edited 
+
+
+public function profile(Request $request)
+{
+    $validator= Validator::make($request->all(),[
+       
+        'phone'=> Rule::unique('clients')->ignore($request->user()->id),
+        'email'=>'unique:clients,email,'.$request->user()->id,
+        'password'=>'confirmed',
+       
+     ]);
+
+     if ($validator->fails()) {
+       return $this->apiResponse(0,$validator->errors()->first(),$validator->errors());
+    }
+    
+   $loginUser=$request->user();
+
+   $loginUser->update($request->all());
+
+
+    if ($request->has('password')) {
+        $loginUser->password=bcrypt($request->password);
+    }
+
+    $loginUser->save();
+
+    $data=[
+        'client'=>$request->user()->fresh()->load('Client_Governate','Blood_type')
+    ];
+    return $this->apiResponse(1,'تم تعديل البيانات  ',$data);
+}
+
+
+
+
 
 
 }
