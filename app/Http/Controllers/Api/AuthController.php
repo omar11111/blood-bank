@@ -197,7 +197,21 @@ public function profile(Request $request)
     return $this->apiResponse(1,'تم تعديل البيانات  ',$data);
 }
 
+public function notificationSettings(Request $request)
+{
+ 
+    $client = $request->user();
 
+    $client->Blood_type()->sync($request->blood_types);
+
+   
+    $client->Client_Governate()->sync($request->governorates);
+     $client=[
+        'client'=>$request->user()->fresh()->load('Client_Governate','Blood_type')
+    ];
+   
+    return $this->apiResponse(1,'تم تعديل البيانات  ',$client);
+}
 
 
 

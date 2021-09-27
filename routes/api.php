@@ -49,18 +49,22 @@ Route::group(['prefix'=>'v1','namespace'=>'api'],function(){
     Route::post('forget-password',[AuthController::class,'forgetPassword'] ) ;
     Route::post('create-new-password',[AuthController::class,'createNewPssword'] ) ;
     
-    //posts
+   
  Route::middleware('auth:api')->group(function () {
+     //posts and favourite posts
     Route::get('post',[PostController::class,'posts'] ) ;
+    Route::post('favourite-posts',[PostController::class,'favouritePosts'] ) ;
+    Route::post('add-favourite-posts',[PostController::class,'makeFavourite']);
     // get user data and view it to be edited 
     Route::post('profile',[AuthController::class,'profile'] ) ;
 
     //view and edite notification settings
     Route::post('notification-settinge',[AuthController::class,'notificationSettings'] ) ;
 
-    //donation
+    //donation making and view donation and push notifications 
+    Route::post('donation',[DonationController::class,'donations'] ) ;
     Route::post('make-donation',[DonationController::class,'makeDonations'] ) ;
-
+     
     
     
  });

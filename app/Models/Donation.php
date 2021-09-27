@@ -19,7 +19,7 @@ class Donation extends Model
 
     public function City()
     {
-        return $this->belongsTo('App\Models\Citiy');
+        return $this->belongsTo('App\Models\City');
     }
 
     public function donation_request()

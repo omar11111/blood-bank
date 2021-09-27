@@ -36,5 +36,10 @@ class Client extends Model
         return $this->belongsToMany('App\Models\Governorate');
     }
 
+    public function favourites()
+    {
+        return $this->belongsToMany('App\Models\Post');
+    }
+
     protected  $hidden=['password','api_token'];
 }

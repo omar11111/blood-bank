@@ -11,16 +11,21 @@ use App\Models\Governorate;
 use App\Models\Setting;
 
 use App\Traits\ApiResponse;
-
+use Illuminate\Http\Request;
 
 class GeneralApiController extends Controller
 {
     use ApiResponse;
     
-    public function cities(){
-        $posts=City::all();
+    public function cities(Request $request){
+        $cities=City::where(function($query) use($request){
 
-        return $this->apiResponse(1 ,'success',$posts);
+         if ($request->has('governorate_id')) {
+            $query->where('governorate_id',$request->governorate_id);
+         }
+
+        } )->get();
+        return $this->apiResponse(1 ,'success',$cities);
         
 
     }
