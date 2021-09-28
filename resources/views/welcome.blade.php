@@ -2,26 +2,19 @@
 @inject('client', 'App\Models\Client')
 @inject('donation', 'App\Models\Donation')
 @inject('post', 'App\Models\Post')
+
+
+    
+
+
 @section('content')
   <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Dashboard</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Blood Bank</li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-
+  
+  @section('page_title')
+  Dashboard
+  @endsection
   <!-- Main content -->
-  <section class="content">
+  
 
     <!-- Default box -->
     <div class="card">
@@ -48,7 +41,7 @@
     </div>
     <!-- /.card -->
 
-    <div class="row">
+    <div class="row p-2">
     <div class="col-lg-4 col-6">
         <!-- small box -->
         <div class="small-box bg-warning">
@@ -94,8 +87,7 @@
       </div>
 
     </div>
-    
-  </section>
+
   <!-- /.content -->
 
 @endsection
