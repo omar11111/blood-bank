@@ -22,7 +22,7 @@ Governorates
         @if (count($recordes))
             @foreach ($recordes as $recorde)
             <tr>
-                <th scope="row">{{$recorde->iteration}}</th>
+                <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$recorde->name}}</td>
                 <td>edit</td>
                 <td>delete</td></tr>

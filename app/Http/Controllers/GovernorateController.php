@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Governorate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GovernorateController extends Controller
 {
@@ -27,7 +28,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        return view('governorates.index');
+        return view('governorates.create');
     }
 
     /**
@@ -38,7 +39,26 @@ class GovernorateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate(['name'=>'required|unique:governorates,name|alpha'],$request->all());
+       
+       
+        if (!$validator) {
+         
+            return  view('governorates.create')->with('errors',$validator);
+
+        }
+
+
+    
+       
+        $record=Governorate::create($request->all());
+            
+        flash()->success(); 
+        return redirect(route('governorate.index'));
+     
+        
+    
+       
     }
 
     /**
