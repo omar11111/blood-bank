@@ -53,8 +53,8 @@ Route::group(['prefix'=>'v1','namespace'=>'api'],function(){
  Route::middleware('auth:api')->group(function () {
      //posts and favourite posts
     Route::get('post',[PostController::class,'posts'] ) ;
-    Route::post('favourite-posts',[PostController::class,'favouritePosts'] ) ;
-    Route::post('add-favourite-posts',[PostController::class,'makeFavourite']);
+    Route::post('create-favourite-posts',[PostController::class,'favouritePosts'] ) ;
+    Route::post('add-favourite-posts',[PostController::class,'viewFavourite']);
     // get user data and view it to be edited 
     Route::post('profile',[AuthController::class,'profile'] ) ;
 

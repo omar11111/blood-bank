@@ -22,10 +22,24 @@ Governorates
         @if (count($recordes))
             @foreach ($recordes as $recorde)
             <tr>
+
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$recorde->name}}</td>
-                <td>edit</td>
-                <td>delete</td></tr>
+                <td>
+                  <a target="_self" class="btn btn-warning text-light  btn-sm"
+                   href="{{route('governorate.edit',  $recorde->id) }}">
+                  <i class="fas fa-edit"></i> </a>
+                </td>
+                <td>
+                  <form action="{{url(route('governorate.destroy',  ['governorate' => $recorde->id]) )}}" method="delete" enctype="multipart-data">
+                    {{csrf_field()}}
+                    
+                    
+                   <button type="submit"  class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt"></button></i> 
+                  </td>
+                  </tr>
+               </div>
+                   
             
             @endforeach      
         @else

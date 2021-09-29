@@ -39,18 +39,18 @@ public function favouritePosts(Request $request)
  ];
  $validator=validator()->make($request->all(),$rules);
 
- if ($validator) {
+ if (!$validator) {
    return $this->apiResponse(0,$validator->errors()->first(),$validator->errors());
  }
 
- $toggle=$request->user()->favourites()->toggle($request->post_id);
- return $this->apiResponse(1,'Success',$toggle);
+ $toggle=$request->user()->Client_Post()->sync($request->post_id,false);
+ return $this->apiResponse(1,'Favorit post linked to it\'s client',$toggle);
 
 }
 
-public function makeFavourite(Request $request)
+public function viewFavourite(Request $request)
 {
-  $posts =$request->user()->favourites()->latest()->baginate(20);
+  $posts =$request->user()->Client_Post()->latest()->paginate(20);
   return $this->apiResponse(1,'Loaded',$posts);
 }
 

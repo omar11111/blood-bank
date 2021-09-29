@@ -33,7 +33,7 @@ class AuthController extends Controller
         'phone'=>'required|regex:/^01[0-2,5]{1}[0-9]{8}/i',
         'email'=>'required|email|unique:clients',
         'password'=>'required|confirmed',
-        'blood_type'=>'required',
+        
         'd_o_b'=>'required|date|date_format:Y-m-d',
         'last_donation_date'=>'required|date|date_format:Y-m-d',
         'city_id'=>'required',

@@ -48,16 +48,12 @@ class GovernorateController extends Controller
 
         }
 
-
-    
-       
         $record=Governorate::create($request->all());
-            
-        flash()->success(); 
+        
+
+        // flash()->success('success');
         return redirect(route('governorate.index'));
      
-        
-    
        
     }
 
@@ -69,7 +65,7 @@ class GovernorateController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -80,7 +76,8 @@ class GovernorateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $governorate=Governorate::findOrFail($id);
+        return view('governorates.edit')->with('governorate',$governorate);
     }
 
     /**
@@ -92,7 +89,19 @@ class GovernorateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $validator = 
+        // $request->validate(
+        //     ['name'=>'required|unique:governorates,name|alpha'],$request->all());
+       
+       
+        // if (!$validator) {
+        //     dd($validator);
+        //     return  view('governorates.edit')->with('errors',$validator);
+
+        // }
+        $governorate=Governorate::findOrFail($id);
+        $governorate->update($request->except(['_token']));
+        return redirect(route('governorate.index'));
     }
 
     /**
@@ -103,6 +112,9 @@ class GovernorateController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        $governorate=Governorate::findOrFail($id);
+        $governorate->delete();
+        return back();
     }
 }
