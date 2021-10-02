@@ -30,7 +30,6 @@ class ClientController extends Controller
         //
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -111,3 +110,6 @@ class ClientController extends Controller
        
     }
 }
+        //
+    
+

@@ -87,7 +87,18 @@
               
             </ul>
           </li>
-         
+          
+          <li class="nav-item">
+            <a href="{{url(route('category.index'))}}" class="nav-link">
+              <i class="fas fa-city  mr-1 fa-lg"></i>
+              <p>
+                Categories
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            
+          </li>
+
           <li class="nav-item">
             <a href="{{url(route('governorate.index'))}}" class="nav-link">
               <i class="fas fa-city  mr-1 fa-lg"></i>
@@ -225,3 +236,14 @@
     })
   });
 </script> --}}
+<script>
+  $(document).read(function(){
+    function fetch_client_data(params) {
+      $.ajax({
+        'url':"{{url(route('client.index'))}}",
+        method:"GET"
+
+      })
+    }
+  });
+</script>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\GovernorateController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('governorate', GovernorateController::class);
 Route::resource('client', ClientController::class);
 Route::get('client/status/{id}', [ClientController::class,'status']);
+Route::resource('client', ClientController::class);
+Route::resource('category', CategoryController::class);

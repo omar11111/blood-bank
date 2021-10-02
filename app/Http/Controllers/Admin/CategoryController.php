@@ -23,21 +23,21 @@ class CategoryController extends Controller
     public function index()
     {
         $records = Category_name::paginate(10);
-        return view('category.index')->with('records',$records);
+        return view('categories.index')->with('records',$records);
     }
 
 
     public function create()
     {
-        return view("Governorates.create");
+        return view("categories.create");
     }
 
 
     public function store(Request $request)
     {
         $this->validatePost($request);
-        Governorate::create($request->all());
-        return redirect('governorate')->with('status' , 'governorate was create successfully :)');
+        Category_name::create($request->all());
+        return redirect('category')->with('status' , 'governorate was create successfully :)');
     }
 
 
@@ -46,25 +46,25 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $record = Governorate::findOrFail($id);
-        return view('governorates.edit',compact('record'));
+        $record = Category_name::findOrFail($id);
+        return view('categories.edit',compact('record'));
     }
 
 
     public function update(Request $request, $id)
     {
         $this->validatePost($request);
-        $record = Governorate::findOrFail($id);
+        $record = Category_name::findOrFail($id);
         $record->update($request->all());
-        return redirect('governorate')->with('status' , 'governorate was updated successfully :)');
+        return redirect('category')->with('status' , 'governorate was updated successfully :)');
     }
 
 
     public function destroy($id)
     {
-        $record = Governorate::findOrFail($id);
+        $record = Category_name::findOrFail($id);
        
         $record->delete();
-        return redirect('governorate')->with('status' , 'governorate was deleted successfully :)');
+        return redirect('category')->with('status' , 'governorate was deleted successfully :)');
     }
 }

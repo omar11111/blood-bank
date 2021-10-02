@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page_title')
-    Governorates
+    Categories
 @endsection()
 
 
@@ -18,8 +18,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                           Live Search
-                           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <a href="{{url("category/create")}}" class="btn btn-block btn-primary">
+                                <span class="fa fa-1x fa-plus">Add Category</span>
+                            </a>
                         </h3>
                     </div>
                 @if(count($records))
@@ -30,12 +31,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>City</th>
-                                <th> Last Donation Date </th>
-                                <th> active or de-active </th>
-                                
+                                <th>Edit</th> 
                                 <th>Delete</th>
                             </tr>
                             </thead>
@@ -44,30 +40,17 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$record->name}}</td>
-                                <td>{{$record->email}}</td>
-                                <td>{{$record->phone}}</td>
-                                <td>{{$record->City_id->name}}</td>
-                                <td>{{$record->last_donation_date}}</td>
-                                  
-                                <td>
-                                    <form action={{url('client/status/'.$record->id)}} method="get">
-                                        @csrf
-                                       @if ($record->is_active==0)
-                                       <button type="submit" class="btn btn-danger btn-sm float-left">Not Active</button>
-                            
-                                       @endif
-                                       @if ($record->is_active==1)
-                                       <button type="submit" class="btn btn-success btn-sm float-left">Active</button>
-                            
-                                       @endif
-                                        {{-- <button type="submit" class="btn btn-{{$}} btn-sm float-left">De-Active</button> --}}
-                                    </form>
 
-                                </td>
-                                
-                                
                                 <td>
-                                    <form action={{url('client/'.$record->id)}} method="POST">
+                                    <a href="{{url('category/'.$record->id.'/edit')}}" class="btn btn-success float-left mr-2">
+                                        <span class="fa fa-info-circle fa-1x"> Edit</span>
+                                    </a>
+                                </td>
+                       
+                                
+    
+                                <td>
+                                    <form action={{url('category/'.$record->id)}} method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger float-left">Delete</button>
@@ -94,8 +77,7 @@
             <div class="row">
                 <div class="col-11 m-3 px-3">
                     <div class="alert alert-info">
-                        There's no users
-                        There's no governorate
+                        There's no  Categories
                     </div>
                 </div>
             </div>
