@@ -9,9 +9,9 @@ class CreateClientGovernorateTable extends Migration {
 	{
 		Schema::create('client_governorate', function(Blueprint $table) {
 			$table->increments('id');
+			$table->timestamps();
 			$table->integer('client_id')->unsigned();
 			$table->integer('governorate_id')->unsigned();
-			$table->timestamps();
 		});
 	}
 

@@ -63,7 +63,7 @@ Route::group(['prefix'=>'v1','namespace'=>'api'],function(){
 
     //donation making and view donation and push notifications 
     Route::post('donation',[DonationController::class,'donations'] ) ;
-    Route::post('make-donation',[DonationController::class,'makeDonations'] ) ;
+    Route::post('make-donation',[DonationController::class,'donationRequestCreate'] ) ;
      
     
     

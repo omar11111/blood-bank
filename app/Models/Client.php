@@ -18,7 +18,7 @@ class Client extends Model
 
     public function City_id()
     {
-        return $this->belongsTo('App\Models\City');
+        return $this->belongsTo('App\Models\City','city_id');
     }
 
     public function Donation()

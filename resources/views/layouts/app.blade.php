@@ -99,6 +99,16 @@
             
           </li>
          
+          <li class="nav-item">
+            <a href="{{url(route('client.index'))}}" class="nav-link">
+              <i class="fas fa-users "></i>
+              <p>
+                Clients
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            
+          </li>
         
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -178,6 +188,8 @@
 </div>
 <!-- ./wrapper -->
 
+{{-- AJAX --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- jQuery -->
 <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
@@ -188,3 +200,28 @@
 <script src="{{asset('adminlte/js/demo.js')}}"></script>
 </body>
 </html>
+
+{{-- <script>
+  $(document).read(function(){
+    fetch_client_data();
+    function fetch_client_data(query='') {
+      $.ajax({
+        url:"{{route('client.action')}}",
+        method:"GET",
+        data:{query:query},
+        dataType:'json',
+        success:function(data)
+        {
+          $('tbody').html(data.tabel_data);
+          $('#total_records').text(data.total_data);
+        }
+
+      })
+     
+    }
+    $(document).on(Keyup,#search,function(){
+       var query = $this.val();
+       fetch_client_data(query);
+    })
+  });
+</script> --}}
