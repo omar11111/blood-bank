@@ -3,20 +3,19 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCitiesTable extends Migration {
+class CreateBloodTypesTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('cities', function(Blueprint $table) {
+		Schema::create('blood_types', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('name');
-			$table->integer('governorate_id')->unsigned();
 			$table->timestamps();
+			$table->string('name');
 		});
 	}
 
 	public function down()
 	{
-		Schema::drop('cities');
+		Schema::drop('blood_types');
 	}
 }

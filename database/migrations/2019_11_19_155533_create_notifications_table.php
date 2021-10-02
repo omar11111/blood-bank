@@ -9,10 +9,10 @@ class CreateNotificationsTable extends Migration {
 	{
 		Schema::create('notifications', function(Blueprint $table) {
 			$table->increments('id');
+			$table->timestamps();
 			$table->string('title');
 			$table->string('content');
 			$table->integer('donation_request_id')->unsigned();
-			$table->timestamps();
 		});
 	}
 

@@ -9,11 +9,11 @@ class CreatePostsTable extends Migration {
 	{
 		Schema::create('posts', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('title');
-			$table->string('photo');
-			$table->text('content');
-			$table->integer('category_id')->unsigned();
 			$table->timestamps();
+			$table->string('title', 200);
+			$table->string('image')->nullable();
+			$table->text('body');
+			$table->integer('category_id')->unsigned();
 		});
 	}
 

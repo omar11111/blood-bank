@@ -9,9 +9,9 @@ class CreateBloodTypeClientTable extends Migration {
 	{
 		Schema::create('blood_type_client', function(Blueprint $table) {
 			$table->increments('id');
+			$table->timestamps();
 			$table->integer('client_id')->unsigned();
 			$table->integer('blood_type_id')->unsigned();
-			$table->timestamps();
 		});
 	}
 

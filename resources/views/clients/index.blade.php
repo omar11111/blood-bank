@@ -12,14 +12,14 @@
 <section class="content">
 
     @include('partials.validation_errors')
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{url("governorate/create")}}" class="btn btn-block btn-primary">
-                                <span class="fa fa-1x fa-plus">Add governorate</span>
-                            </a>
+                           Live Search
+                           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         </h3>
                     </div>
                 @if(count($records))
@@ -30,7 +30,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>name</th>
-                                <th>Edit</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>City</th>
+                                <th> Last Donation Date </th>
+                                
                                 <th>Delete</th>
                             </tr>
                             </thead>
@@ -39,13 +43,14 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$record->name}}</td>
+                                <td>{{$record->email}}</td>
+                                <td>{{$record->phone}}</td>
+                                <td>{{$record->City_id->name}}</td>
+                                <td>{{$record->last_donation_date}}</td>
+                                
+                                
                                 <td>
-                                    <a href="{{url('governorate/'.$record->id.'/edit')}}" class="btn btn-success float-left mr-2">
-                                        <span class="fa fa-info-circle fa-1x"> Edit</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form action={{url('governorate/'.$record->id)}} method="POST">
+                                    <form action={{url('client/'.$record->id)}} method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger float-left">Delete</button>

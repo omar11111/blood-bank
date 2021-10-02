@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\GovernorateController;
+use App\Http\Controllers\Admin\GovernorateController;
+use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,4 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('governorate', GovernorateController::class);
+Route::resource('client', ClientController::class);

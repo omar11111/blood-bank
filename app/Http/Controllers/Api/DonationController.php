@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Donation;
+use App\Models\Token;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -30,35 +31,63 @@ class DonationController extends Controller
     
 
 }
-  public function makeDonations(Request $request)
-  {
-    
-      
-      
-      $validator= Validator::make($request->all(),[
-          'name'=>'required|max:50',
-          'age'=>'required|numeric|gt:16',
-          'bags_num'=>'required|numeric',
-          'phone'=>'required|unique:donations|regex:/^01[0-2,5]{1}[0-9]{8}/i',
-          'notes'=>'required|string',
-          
-       ]);
-  
-       if ($validator->fails()) {
-         return $this->apiResponse(0,$validator->errors()->first(),$validator->errors());
-      }
-  
-      $donation =Donation::create($request->all());
-    
-     
 
-      //the clients Who have the same gvovernrates and blood types
-      $clientIds=$donation->city->Governorate_Name->Govern_client()->whereHas('Blood_type',function($q) use( $request){
-        $q->where('blood_types.id',$request->blood_type_id);
-      })->pluck('clients.id')->toArray();
-   
-      return $this->apiResponse(1,'تم تعديل البيانات  ',$clientIds);
+
+public function donationRequestCreate(Request $request){
+  $validate = validator()->make($request->all(),[
+      "name"=>"required",
+      "age"=>"required",
+      "blood_type_id" =>"required|exists:blood_types,id",
+      "bags_num"=>"required:digits",
+      "hospital_name"=>"required",
+      "hospital_address"=>"required",
+      "city_id"=>"required|exists:cities,id",
+     ]);
+     if($validate->fails()){
+      return $this->apiResponse(0,$validate->errors()->first(),$validate->errors());
   }
+  $send = "";
+$request->user()->Donation()->attach($request->client_id);
+  // create donation request
+ $donationRequest = $request->user()->Donation()->create($request->all());
+ // find  clients suitable for this donation
+  $clientsIdes = $donationRequest->city->governorate->clients()
+      ->whereHas("bloodTypes",function($q) use ($request){
+          $q->where("blood_types.id",$request->blood_type_id);
+      })->pluck("clients.id")->toarray();
+
+      //dd($clientsIdes);
+
+  if(count($clientsIdes)){
+
+      $notifications = $donationRequest->notification()->create([
+
+          "title" => "يوجد حاله تبرع ",
+          "content" => $donationRequest->blood_type."محتاج متبرع لفصيله "
+      ]);
+      // add record in    client_notification table
+     $notifications->clients()->attach($clientsIdes);
+
+      // push  notification by firebase
+
+      $token = Token::whereIn('client_id',$clientsIdes)
+          ->where('token','!=',null)->pluck('token')->toarray();
+      if(count($token)){
+
+          $title = $notifications->title;
+          $body = $notifications->content;
+          $data = [
+            'donation_request_id'=>$donationRequest->id
+          ];
+          $send = notifyByFirebase($title,$body,$token,$data);
+
+      }
+
+  }
+
+  return $this->apiResponse(1,'تم الاضافه بنجاح ',$donationRequest);
+}
+
 }
 
 ?>

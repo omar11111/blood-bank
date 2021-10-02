@@ -9,10 +9,10 @@ class CreateClientNotificationTable extends Migration {
 	{
 		Schema::create('client_notification', function(Blueprint $table) {
 			$table->increments('id');
-			$table->boolean('is_read');
-			$table->integer('notification_id')->unsigned();
-			$table->integer('client_id')->unsigned();
 			$table->timestamps();
+			$table->integer('client_id')->unsigned();
+			$table->integer('notification_id')->unsigned();
+			$table->tinyInteger('is_read')->default('0');
 		});
 	}
 
