@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="titleForPost">name</label>
-                            <input type="text" value="{{$record->name}}" name="name" class="form-control" id="name" placeholder="Enter name for governorate">
+                            <input type="text" value="{{$record->name}}" name="name" class="form-control" id="name" placeholder="Enter name for Client">
                         </div>
 
                     </div>

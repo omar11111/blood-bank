@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     private  function validatePost($request){
         $rules =[
-            "name"=>"required|unique:governorates,name",
+            "name"=>"required|unique:categories,name",
         ];
         $message = [
             "name.required" => "name must  have value",

@@ -3,7 +3,7 @@
 @section('content')
 
 @section('page_title')
-Edit Category
+Edit City
 @endsection()
 
 
@@ -15,18 +15,18 @@ Edit Category
             @include('partials.validation_errors')
             <div class="card card-primary">
                 <div class="card-header bg-info">
-                    <h3 class="card-title">Edit Category</h3>
+                    <h3 class="card-title">Edit City</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
-                <form action="{{url('category/'.$record->id)}}" method="POST">
+                <form action="{{url('city/'.$record->id)}}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="titleForPost">name</label>
-                            <input type="text" value="{{$record->name}}" name="name" class="form-control" id="name" placeholder="Enter name for Categories">
+                            <input type="text" value="{{$record->name}}" name="name" class="form-control" id="name" placeholder="Enter name for City">
                         </div>
 
                     </div>
