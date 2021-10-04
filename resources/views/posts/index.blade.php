@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page_title')
-    Clients
+    Posts
 @endsection()
 
 
@@ -18,8 +18,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                           Live Search
-                           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <a href="{{url("posts/create")}}" class="btn btn-block btn-primary">
+                                <span class="fa fa-1x fa-plus">Add posts</span>
+                            </a>
                         </h3>
                     </div>
                 @if(count($records))
@@ -39,40 +40,33 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($records as $record)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$record->title}}</td>
                                 <td>{{$record->image}}</td>
                                 <td>{{$record->body}}</td>
-                                <td>{{$record->City_id->name}}</td>
-                                <td>{{$record->last_donation_date}}</td>
+                                <td>{{$record->Category_Name->name}}</td>
+                               
                                   
                                 <td>
-                                    <form action={{url('client/status/'.$record->id)}} method="get">
-                                        @csrf
-                                       @if ($record->is_active==0)
-                                       <button type="submit" class="btn btn-danger btn-sm float-left">Not Active</button>
-                            
-                                       @endif
-                                       @if ($record->is_active==1)
-                                       <button type="submit" class="btn btn-success btn-sm float-left">Active</button>
-                            
-                                       @endif
-                                        {{-- <button type="submit" class="btn btn-{{$}} btn-sm float-left">De-Active</button> --}}
-                                    </form>
-
+                                    <a href="{{url('posts/'.$record->id.'/edit')}}" class="btn btn-success float-left mr-2">
+                                        <span class="fa fa-info-circle fa-1x"> Edit</span>
+                                    </a>
                                 </td>
-                                
-                                
+
                                 <td>
-                                    <form action={{url('client/'.$record->id)}} method="POST">
+                                    <form action={{url('posts/'.$record->id)}} method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger float-left">Delete</button>
                                     </form>
 
                                 </td>
+                                
+                                
+                            
                             </tr>
                             @endforeach
                             </tbody>
@@ -93,8 +87,7 @@
             <div class="row">
                 <div class="col-11 m-3 px-3">
                     <div class="alert alert-info">
-                        There's no Clients
-                       
+                        There's no posts
                     </div>
                 </div>
             </div>

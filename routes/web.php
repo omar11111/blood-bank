@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\Admin\GovernorateController;
 use App\Http\Controllers\Admin\ClientController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\Posts\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\Posts\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,4 @@ Route::get('client/status/{id}', [ClientController::class,'status']);
 Route::resource('client', ClientController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('city', CityController::class);
+Route::resource('posts', PostController::class);

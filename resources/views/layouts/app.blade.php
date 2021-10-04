@@ -62,37 +62,21 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url(route('posts.index'))}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Posts
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Posts</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Categories</p>
-                </a>
-              </li>
-              
-            </ul>
+           
           </li>
           
           <li class="nav-item">
             <a href="{{url(route('category.index'))}}" class="nav-link">
               <i class="fas fa-city  mr-1 fa-lg"></i>
               <p>
-                Categories
+               Posts Categories
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>

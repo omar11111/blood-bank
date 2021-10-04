@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Posts;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category_name;
@@ -23,13 +23,13 @@ class CategoryController extends Controller
     public function index()
     {
         $records = Category_name::paginate(10);
-        return view('categories.index')->with('records',$records);
+        return view('posts/categories.index')->with('records',$records);
     }
 
 
     public function create()
     {
-        return view("categories.create");
+        return view("posts/categories.create");
     }
 
 
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $record = Category_name::findOrFail($id);
-        return view('categories.edit',compact('record'));
+        return view('posts/categories.edit',compact('record'));
     }
 
 
